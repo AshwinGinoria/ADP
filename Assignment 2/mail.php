@@ -3,6 +3,7 @@
 // Change PATH as per your PC !!
 include '/home/ashwin/vendor/phpmailer/phpmailer/src/PHPMailer.php';
 include '/home/ashwin/vendor/phpmailer/phpmailer/src/SMTP.php';
+include '/home/ashwin/vendor/phpmailer/phpmailer/src/Exception.php';
 
 // Using PHPMailer Namespace as specified PHPMailer developers
 use PHPMailer\PHPMailer\PHPMailer;
@@ -19,9 +20,11 @@ try {
     $mail->SMTPSecure = 'tls';
     $mail->Port = 587;
  
-    $mail->setFrom('ashwintemp2105@gmail.com', 'Admin');
-    $mail->addAddress('ashwinginoria@gmail.com', 'Ashwin');
-    $mail->addReplyTo('noreply@gmail.com', 'noreply');
+    $mail->setFrom('ashwintemp2105@gmail.com', 'Ashwin Ginoria');
+    $mail->addAddress('ashwinginoria@gmail.com', 'Ashwin Ginoria');
+    
+    // Add Reply to -_-
+    // $mail->addReplyTo('noreply@gmail.com', 'noreply');
     
     // Adding Carbon Copy
     //$mail->addCC('cc@example.com');
@@ -33,8 +36,13 @@ try {
  
     //Content
     $mail->isHTML(true); 
-    $mail->Subject = 'Test Mail Subject!';
-    $mail->Body    = 'This is SMTP Email Test';
+    $mail->Subject = 'Form details below';
+    $mail->Body    = 
+    "First Name: {$_POST["FirstName"]} <br>".
+    "Last Name: {$_POST["LastName"]} <br>".
+    "Email: {$_POST["Email"]} <br><br>".
+    "Telephone: {$_POST["Phone"]} <br>".
+    "Comments: {$_POST["Comments"]}";
  
     $mail->send();
     echo 'Message has been sent';
