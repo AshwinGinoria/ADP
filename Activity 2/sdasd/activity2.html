@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <title>Activity2</title>
+    <head><b>Password Validation</b></head>
+    <link rel="stylesheet" href="activity2.css">
+    <body>
+        <form action = "activity.php" method="POST">
+            <h3>Username:</h3>
+            <input id="formtext" type="text" name = "user">
+            <h3>Password:</h3>
+            <input type="password" id="pass" name="pass" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+            <button type="submit" id = "submit">Submit</button>
+        </form>
+
+        <div id = "message">
+            <h3>Password must contain:</h3>
+            <p id = "lower" class = "invalid">A lowerCase letter</p>
+            <p id = "upper" class = "invalid">An Uppercase letter</p>
+            <p id = "number" class = "invalid">A number</p>
+            <p id = "length" class = "invalid">Minimum 8 Characters.</p>
+
+        </div>
+        <script src="./activity2.js"></script>
+    </body>
+</html>

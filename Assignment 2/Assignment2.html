@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<HTMl>
+    <TITLE>Assignment 2</TITLE>
+    <head>
+
+        <link href="./Assignment2.css" rel="stylesheet">
+    </head>
+    <BODY>
+        <form action="mail.php" method="POST">
+            <fieldset>
+                <legend>Personel Information</legend>
+                <div class="div_form" id="label">
+                    <span class="Form_text" >First Name * :</span><br>
+                    <span class="Form_text" >Last Name * :</span><br>
+                    <span class="Form_text" >Email Address * :</span><br>
+                    <span class="Form_text" >Telephone Number * :</span><br>
+                    <span class="Form_text" >Comments * :</span><br>
+                </div>
+                <div class="div_form">
+                    <input class="input" id="FirstName" type="text" name="FirstName" pattern="{1}" title="This is a Compulsary field" required><br>
+                    <input class="input" id="LastName" type="text" name="LastName" pattern="{1}" title="This is a Compulsary field" required><br>
+                    <input class="input" id="Email" type="email" name="Email" pattern="{1}" title="This is a Compulsary field" required><br>
+                    <input class="input" id="Phone" type="tel" name="Phone" pattern="{10,10}" title="This is a Compulsary field"><br>
+                    <textarea class="input" id="Comments" rows="4" name="Comments" pattern=".{1,}" title="This is a Compulsary field" required></textarea>
+                </div><br>
+                <input type="submit" id="submit" name="submit">
+            </fieldset>
+        </form>
+    </BODY>
+</HTMl>
