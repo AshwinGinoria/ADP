@@ -16,12 +16,12 @@ try {
     $mail->Host = 'smtp.gmail.com';
     $mail->SMTPAuth = true;
     $mail->Username = 'ashwintemp2105@gmail.com';
-    $mail->Password = 'vyomchutiyahai';
+    $mail->Password = 'Password-215';
     $mail->SMTPSecure = 'tls';
     $mail->Port = 587;
  
     $mail->setFrom('ashwintemp2105@gmail.com', 'Ashwin Ginoria');
-    $mail->addAddress('ashwinginoria@gmail.com', 'Ashwin Ginoria');
+    $mail->addAddress('abhinavchoudary.0409@gmail.com', 'Abhinav Choudary');
     
     // Add Reply to -_-
     // $mail->addReplyTo('noreply@gmail.com', 'noreply');
