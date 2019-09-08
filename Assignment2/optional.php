@@ -6,32 +6,14 @@
     $json_data = json_decode($json,true);
 
     // Print data
-    foreach ($json_data as $character)
+    for ($i = 0; $i < 6 ; $i++)
     {
-        foreach ($character as $attribute)
-        {
-            if (is_array($attribute))
-            {
-                foreach ($attribute as $val) 
-                {
-                    if (is_array($val))
-                    {
-                        foreach ($val as $value) 
-                        {
-                            echo "$value ";
-                        }
-                    }
-                    else
-                    {
-                        echo "$val ";
-                    }
-                }
-            }
-            else
-            {
-                echo "$attribute's wand is  ";
-            }
-        }
-        echo "<br>";
+        $character = $json_data[$i];
+        $name = $character['name'];
+        $wand = $character['wand'][0];
+        $wood = $wand['wood'];
+        $length = $wand['length'];
+        $core = $wand['core'];
+        echo "$name's wand is $wood, $length, with a $core core.<br>";
     }
 ?>
