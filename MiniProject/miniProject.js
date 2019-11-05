@@ -1,8 +1,8 @@
 function showResult(str) {
     var xhttp;
-    var minimum = document.getElementById("minimum");
-    var maximum = document.getElementById("maxmum");
-    var average = document.getElementById("average");
+    var minimum = document.getElementById("min");
+    var maximum = document.getElementById("max");
+    var average = document.getElementById("avg");
     if (minimum.checked==true){
         document.getElementById("resultMin").innerHTML = "Correct"
     }
