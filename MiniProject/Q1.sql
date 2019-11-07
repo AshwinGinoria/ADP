@@ -26,6 +26,3 @@ LINES TERMINATED BY '\n'
 IGNORE 1 ROWS
 (@time,co,h,no2,o3,p,pm_10,pm_1_0,pm_2_5,so2,t,ws)
 SET time= STR_TO_DATE(@time, '%m/%d/%Y %k:%i');
-
-SELECT time FROM Pollution
-WHERE time BETWEEN "2019-10-14" AND "2019-10-19";
