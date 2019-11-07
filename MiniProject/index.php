@@ -3,27 +3,76 @@
 <head>
 	<title>Mini Project</title>
 	<link rel="stylesheet" href="miniProject.css">
+	
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+	<!-- documentation at http://getbootstrap.com/docs/4.1/, alternative themes at https://bootswatch.com/ -->
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<form action="result.php" method="POST">
-		From :
-		<input type="date" name="datefrom" id="from">
-		To:
-		<input type="date" name="dateto" id="to">
-		<select name="attribute">
-			<!-- PRE-POPULATING -->
-			<?php include("prepopulate.php"); ?>
-		</select>
-		<button type="submit" id="Submit">Submit Query</button>
-		<br><br>
-		 Minimun :   
-		<input type="checkbox" name="minimum" id="min">
-		 Maximun :     
-		<input type="checkbox" name="maximum" id="max">
-		 Average :    
-		<input type="checkbox" name="average" id="avg">
-	</form>
+	<nav class="navbar navbar-expand-md navbar-light bg-light border">
+		<a class="navbar-brand" href="/MiniProject/"><span class="red">Applied Data-Base Practicum</span></a>
+	</nav>
+	<div class="row d-flex justify-content-center p-5">
+		<div class="col-md-4 px-3" id="form">
+			<form action="result.php" method="POST">
+				<div class="form-group row">
+					<div class="col-sm-12 card-header text-center" id="Form-header">
+						<span id="Form-header-text">Query Form</span>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label class="col-sm-4 col-form-label text-left" for="from">Date From : </label>
+					<div class="col-sm-8">
+						<input class="form-control" type="date" name="datefrom" id="from">
+					</div>
+				</div>
+				<div class="form-group row">
+					<label class="col-sm-4 col-form-label text-left" for="to">Date To : </label>
+					<div class="col-sm-8">
+						<input class="form-control" type="date" name="dateto" id="to">
+					</div>
+				</div>  
+				<fieldset class="form-group">
+					<div class="row">
+					<legend class="col-form-label col-sm-4 pt-0 text-left">CheckBox : </legend>
+					<div class="col-sm-8 text-left">
+						<div class="form-check p-1">
+							<input class="form-check-label" type="checkbox" name="minimum" id="min">
+							<label class="form-check-label" for="Minimum">Minimun</label>
+						</div>
+						<div class="form-check p-1">
+							<input class="form-check-label" type="checkbox" name="maximum" id="max">
+							<label class="form-check-label" for="Maximum">Maximun</label>
+						</div>
+						<div class="form-check p-1">
+							<input class="form-check-label" type="checkbox" name="average" id="avg">
+							<label class="form-check-label" for="Average">Average</label>
+						</div>
+					</div>
+					</div>
+				</fieldset>
+				<div class="form-group row text-center d-flex justify-content-center">
+					<select name="attribute" class="custom-select col-sm-6">
+						<!-- PRE-POPULATING -->
+						<?php include("prepopulate.php"); ?>
+					</select>
+				</div>
+				<div class="form-group row d-flex justify-content-center">
+					<button class="btn btn-primary" type="submit" id="Submit">Submit Query</button>
+				</div>
+			</form>
+		</div>
+	</div>
+    <footer class="small text-center text-muted">
+        Design By <a target="_blank" href="https://github.com/AshwinGinoria">Ashwin Ginoria</a>, <a target="_blank" href="https://github.com/Saransh0905">Saransh Jain</a>.
+    </footer>
 </body>
 <script src = "miniProject.js"></script>
 

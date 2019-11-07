@@ -1,105 +1,129 @@
 <HTML>
-    <BODY>
-    <?php
+<HEAD>
+	<title>Result Page</title>
+	<link rel="stylesheet" href="miniProject.css">
+    
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        $datefrom = $_POST["datefrom"];
-        $dateto = $_POST["dateto"];
-        $attribute = $_POST["attribute"];
+    <!-- documentation at http://getbootstrap.com/docs/4.1/, alternative themes at https://bootswatch.com/ -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
 
-        // Print Error IF Dateto < DateFrom
-        if ($datefrom > $dateto) {
-            die ("Please Enter Valid Dates");
-        }
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</HEAD>
+<BODY>
+    
+	<nav class="navbar navbar-expand-md navbar-light bg-light border">
+		<a class="navbar-brand" href="/MiniProject/"><span class="red">Applied Data-Base Practicum</span></a>
+    </nav>
+    <main class="container p-5">
+        <?php
 
-        // Specifying Mysql Connection Variables
-        $dbhost = 'localhost';
-        $dbuser = 'ashwin';
-        $dbpass = '1999';
-        $dbname = 'miniProject';
-        $tablename = 'Pollution';
+            $datefrom = $_POST["datefrom"];
+            $dateto = $_POST["dateto"];
+            $attribute = $_POST["attribute"];
 
-        // Establishing Connection to Mysql server
-        $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
+            // Print Error IF Dateto < DateFrom
+            if ($datefrom > $dateto) {
+                die ("Please Enter Valid Dates");
+            }
 
-        // Error Check
-        if (!$conn) {
-            die("Could not connect: ". mysqli_connect_error($conn));
-        }
+            // Specifying Mysql Connection Variables
+            $dbhost = 'localhost';
+            $dbuser = 'ashwin';
+            $dbpass = '1999';
+            $dbname = 'miniProject';
+            $tablename = 'Pollution';
 
-        // If Min Checked
-        if (!$_POST["minimum"]) {
-            echo "Min is Not Checked <br>";
-        }
-        else {
-            // Defining SQL Query
-            $query = "SELECT MIN({$attribute}) FROM {$tablename}
-                        WHERE time BETWEEN '{$datefrom}' AND '{$dateto}'" ;
-            
-            // Getting Query Output
-            $retval = mysqli_query($conn, $query);
-            
+            // Establishing Connection to Mysql server
+            $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
+
             // Error Check
-            if (!$retval) {
-                echo 'Could not get Min data: ' . mysqli_error($conn) . "<br>";
+            if (!$conn) {
+                die("Could not connect: ". mysqli_connect_error($conn));
             }
-            
-            // Printing Minimum Value obtained
-            else {
-                $row = mysqli_fetch_row($retval);
-                echo "Min {$attribute} : " . $row[0] . "<br>";
-            }
-        }
 
-        // If Max Checked
-        if (!$_POST["maximum"]) {
-            echo "Max is Not Checked <br>";
-        }
-        else {
-            // Defining SQL Query
-            $query = "SELECT MAX({$attribute}) FROM {$tablename}
-                        WHERE time BETWEEN '{$datefrom}' AND '{$dateto}'" ;
-            
-            // Getting Query Output
-            $retval = mysqli_query($conn, $query);
-            
-            // Error Check
-            if (!$retval) {
-                echo 'Could not get Max data: ' . mysqli_error($conn) . "<br>";
+            // If Min Checked
+            if (!$_POST["minimum"]) {
+                echo "Min is Not Checked <br>";
             }
-            
-            // Printing Maximum Value obtained
             else {
-                $row = mysqli_fetch_row($retval);
-                echo "Max {$attribute} : " . $row[0] . "<br>";
+                // Defining SQL Query
+                $query = "SELECT MIN({$attribute}) FROM {$tablename}
+                            WHERE time BETWEEN '{$datefrom}' AND '{$dateto}'" ;
+                
+                // Getting Query Output
+                $retval = mysqli_query($conn, $query);
+                
+                // Error Check
+                if (!$retval) {
+                    echo 'Could not get Min data: ' . mysqli_error($conn) . "<br>";
+                }
+                
+                // Printing Minimum Value obtained
+                else {
+                    $row = mysqli_fetch_row($retval);
+                    echo "Min {$attribute} : " . $row[0] . "<br>";
+                }
             }
-        }
 
-        // If AVG Checked
-        if (!$_POST["average"]) {
-            echo "Avg is Not Checked <br>";
-        }
-        else {
-            // Defining SQL Query
-            $query = "SELECT AVG({$attribute}) FROM {$tablename}
-                        WHERE time BETWEEN '{$datefrom}' AND '{$dateto}'" ;
-            
-            // Getting Query Output
-            $retval = mysqli_query($conn, $query);
-            
-            // Error Check
-            if (!$retval) {
-                echo 'Could not get Avg data: ' . mysqli_error($conn) . "<br>";
+            // If Max Checked
+            if (!$_POST["maximum"]) {
+                echo "Max is Not Checked <br>";
             }
-            
-            // Printing Average Value obtained
             else {
-                $row = mysqli_fetch_row($retval);
-                echo "Avg {$attribute} : " . $row[0] . "<br>";
+                // Defining SQL Query
+                $query = "SELECT MAX({$attribute}) FROM {$tablename}
+                            WHERE time BETWEEN '{$datefrom}' AND '{$dateto}'" ;
+                
+                // Getting Query Output
+                $retval = mysqli_query($conn, $query);
+                
+                // Error Check
+                if (!$retval) {
+                    echo 'Could not get Max data: ' . mysqli_error($conn) . "<br>";
+                }
+                
+                // Printing Maximum Value obtained
+                else {
+                    $row = mysqli_fetch_row($retval);
+                    echo "Max {$attribute} : " . $row[0] . "<br>";
+                }
             }
-        }
 
-        // Closing Mysql
-        mysqli_close($conn);
-    ?>
-    </BODY>
+            // If AVG Checked
+            if (!$_POST["average"]) {
+                echo "Avg is Not Checked <br>";
+            }
+            else {
+                // Defining SQL Query
+                $query = "SELECT AVG({$attribute}) FROM {$tablename}
+                            WHERE time BETWEEN '{$datefrom}' AND '{$dateto}'" ;
+                
+                // Getting Query Output
+                $retval = mysqli_query($conn, $query);
+                
+                // Error Check
+                if (!$retval) {
+                    echo 'Could not get Avg data: ' . mysqli_error($conn) . "<br>";
+                }
+                
+                // Printing Average Value obtained
+                else {
+                    $row = mysqli_fetch_row($retval);
+                    echo "Avg {$attribute} : " . $row[0] . "<br>";
+                }
+            }
+
+            // Closing Mysql
+            mysqli_close($conn);
+        ?>
+    </main>
+    <footer class="small text-center text-muted">
+        Design By <a target="_blank" href="https://github.com/AshwinGinoria">Ashwin Ginoria</a>, <a target="_blank" href="https://github.com/Saransh0905">Saransh Jain</a>.
+    </footer>
+</BODY>
 </HTML>
