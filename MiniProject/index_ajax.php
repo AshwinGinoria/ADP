@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html>	
 <html>
 <head>
 	<title>Mini Project</title>
@@ -19,9 +19,10 @@
 	<nav class="navbar navbar-expand-md navbar-light bg-light border">
 		<a class="navbar-brand" href="/MiniProject/"><span class="red">Applied Data-Base Practicum</span></a>
 	</nav>
+	<div id="Initial">
 	<div class="row d-flex justify-content-center p-5">
 		<div class="col-md-4 px-3" id="form">
-			<form action="result.php" method="GET">
+			<form>
 				<div class="form-group row">
 					<div class="col-sm-12 card-header text-center" id="Form-header">
 						<strong id="Form-header-text">Query Form</strong>
@@ -67,13 +68,28 @@
 					</div>
 				</fieldset>
 				<div class="form-group row d-flex justify-content-center">
-					<button class="btn btn-primary" type="submit" id="Submit">Submit Query</button>
+					<button onclick="SubmitForm()" class="btn btn-primary" type="button" id="Submit">Submit Query</button>
 				</div>
 			</form>
 		</div>
 	</div>
+	</div>
     <footer class="small text-center text-muted">
         Design By <a target="_blank" href="https://github.com/AshwinGinoria">Ashwin Ginoria</a>, <a target="_blank" href="https://github.com/Saransh0905">Saransh Jain</a>.
     </footer>
+	<script>
+		function SubmitForm() {
+			console.log("FORM SUBMITTED");
+			var toChange = document.getElementById("Initial");
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					toChange.innetHTML = "";
+				}
+			};
+			xhttp.open("GET", "result_ajax.txt", true);
+			xhttp.send();
+		}
+	</script>
 </body>
 </html>

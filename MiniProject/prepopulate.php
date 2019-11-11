@@ -23,7 +23,7 @@
     // Iterating over row Adding options in DropDown
     while ($column = mysqli_fetch_row($columns)) {
         if ($column[0] != 'time') {
-            echo "<option id='{$column[0]}' value='{$column[0]}'>{$column[0]}</option>";
+            echo "<option id='Option' value='{$column[0]}'>{$column[0]}</option>";
         }
     }
 

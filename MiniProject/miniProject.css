@@ -2,11 +2,15 @@
     color: royalblue;
 }
 #form {
-    box-shadow: 0px 0px 4px grey;
+    box-shadow: 0px 0px 5px grey;
 }
 #Form-header {
     background-color: #007bff;
 }
 #Form-header-text {
     color: white;
+}
+#id {
+    height: 500px;
+    width: 200px;
 }
