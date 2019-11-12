@@ -19,7 +19,7 @@
 	<nav class="navbar navbar-expand-md navbar-light bg-light border">
 		<a class="navbar-brand" href="/MiniProject/"><span class="red">Applied Data-Base Practicum</span></a>
 	</nav>
-	<div id="Initial">
+	<div  id="Initial">
 	<div class="row d-flex justify-content-center p-5">
 		<div class="col-md-4 px-3" id="form">
 			<form>
@@ -42,7 +42,7 @@
 				</div>
 				<div class="form-group row">
 					<label class="col-sm-4 col-form-label text-left" for="to">Column : </label>
-					<select name="attribute" class="custom-select col-sm-7 ml-3">
+					<select name="attribute" class="custom-select col-sm-7 ml-3" id="attribute">
 						<option value='' disabled selected id="Option">Select</option>
 						<!-- PRE-POPULATING -->
 						<?php include("prepopulate.php"); ?>
@@ -74,22 +74,44 @@
 		</div>
 	</div>
 	</div>
+	</div>
     <footer class="small text-center text-muted">
         Design By <a target="_blank" href="https://github.com/AshwinGinoria">Ashwin Ginoria</a>, <a target="_blank" href="https://github.com/Saransh0905">Saransh Jain</a>.
     </footer>
 	<script>
 		function SubmitForm() {
-			console.log("FORM SUBMITTED");
-			var toChange = document.getElementById("Initial");
+			
+			// Getting Values from HTML Page
+			var Datefrom = document.getElementById("from").value;
+			var Dateto = document.getElementById("to").value;
+			var attribute = document.getElementById("attribute").value;
+			
+			// Converting FORM DATA To get query
+			var str = "datefrom=" + Datefrom + "&dateto=" + Dateto + "&attribute=" + attribute;
+			if (document.getElementById("min").checked)
+				str = str + "&minimum=on";
+			
+			if (document.getElementById("max").checked)
+				str = str + "&maximum=on";
+			
+			if (document.getElementById("avg").checked)
+				str = str + "&average=on";
+			
+			// Request Data from result.php
 			var xhttp = new XMLHttpRequest();
 			xhttp.onreadystatechange = function() {
-				if (this.readyState == 4 && this.status == 200) {
-					toChange.innetHTML = "";
+				if (this.readyState == 4) {
+					var res = this.response;
+					document.getElementById("Initial").innerHTML = res.getElementById("NewData").innerHTML;
+					console.log(res.getElementById("myscript").innerHTML);
+					eval(res.getElementById("myscript").innerHTML);
 				}
 			};
-			xhttp.open("GET", "result_ajax.txt", true);
+			xhttp.responseType = 'document';
+			xhttp.open("GET", "result.php?" + str, true);
 			xhttp.send();
-		}
+		};
 	</script>
+	<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </body>
 </html>

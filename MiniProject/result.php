@@ -19,6 +19,7 @@
 	<nav class="navbar navbar-expand-md navbar-light bg-light border">
 		<a class="navbar-brand" href="/MiniProject/"><span class="red">Applied Data-Base Practicum</span></a>
     </nav>
+    <div id="NewData">
     <div class="container m-5">
         <div class="row">
             <div class="col-sm-4" style="margin-top: auto; margin-bottom: auto;">
@@ -26,9 +27,9 @@
                 <p>
                     <?php
 
-                        $datefrom = $_POST["datefrom"];
-                        $dateto = $_POST["dateto"];
-                        $attribute = $_POST["attribute"];
+                        $datefrom = $_GET["datefrom"];
+                        $dateto = $_GET["dateto"];
+                        $attribute = $_GET["attribute"];
 
                         // Print Error IF Dateto < DateFrom
                         if ($datefrom > $dateto) {
@@ -66,7 +67,7 @@
                         $new_arr = array();
 
                         // If Min Checked
-                        if (!$_POST["minimum"]) {
+                        if (!$_GET["minimum"]) {
                             echo "Min is Not Checked <br>";
                         }
                         else {
@@ -93,7 +94,7 @@
                         }
 
                         // If Max Checked
-                        if (!$_POST["maximum"]) {
+                        if (!$_GET["maximum"]) {
                             echo "Max is Not Checked <br>";
                         }
                         else {
@@ -120,7 +121,7 @@
                         }
 
                         // If AVG Checked
-                        if (!$_POST["average"]) {
+                        if (!$_GET["average"]) {
                             echo "Avg is Not Checked <br>";
                         }
                         else {
@@ -139,9 +140,13 @@
                             // Printing Average Value obtained
                             else {
                                 $row = mysqli_fetch_row($retval);
-                                echo "Avg {$attribute} : " . $row[0] . "<br>";
+                                $selectedavg = (float)$row[0];
+                                echo "Avg {$attribute} : " . $selectedavg . "<br>";
                             }
                         }
+
+                        // Calculating Net data Average
+                        
                         // Closing Mysql
                         mysqli_close($conn);
                     ?>
@@ -154,11 +159,10 @@
             </div>
         </div>
     </div>
-    <footer class="small text-center text-muted">
-        Design By <a target="_blank" href="https://github.com/AshwinGinoria">Ashwin Ginoria</a>, <a target="_blank" href="https://github.com/Saransh0905">Saransh Jain</a>.
-    </footer>
-    <script>
-        window.onload = function () {
+    </div>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <script id="myscript">
+        function loadChart() {
         
         var chart = new CanvasJS.Chart("chartContainer", {
             theme: "light2", // "light1", "light2", "dark1", "dark2"
@@ -169,13 +173,20 @@
             },
             axisX: {
                 title: "Date Time",
-                valueFormatString: "YY-MM-DD"
+                valueFormatString: "YY-MM-DD",
+                stripLines:[{
+                    startValue:<?php echo strtotime(date($datefrom))*1000; ?>,
+                    endValue:<?php echo strtotime(date($dateto))*1000; ?>,
+                    color:"#d8d8d8",
+                    label : "Selected Time Range",
+                    labelFontColor: "#a8a8a8"
+                }]
             },
             axisY: {
                 title: <?php echo "\"$attribute\""; ?>
             },
             data: [{
-                type: "area",
+                type: "line",
                 xValueType: "dateTime",
                 dataPoints: <?php echo json_encode($dataPoints); ?>
             },
@@ -187,8 +198,9 @@
             }]
         });
         chart.render();
-    }
+    };
+    loadChart();
+    window.onload = loadChart();
     </script>
-    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </BODY>
 </HTML>
